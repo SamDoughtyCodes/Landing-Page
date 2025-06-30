@@ -1,6 +1,8 @@
 # Landing-Page
 A basic landing page with login credentials, hooked up to a database for a bit of fun
 
+NOTE: All commits are made by me, Sam Doughty. Any from the account "LilSpinachBoy1" are still me, but just from certain devices where that account is signed in.
+
 ## How it works
 The following structure diagram provides a basic overview of the components of the project:
 ![Project structure diagram](https://github.com/SamDoughtyCodes/Landing-Page/blob/main/Super-Curricular%20Landing%20Page%20(1).png)
