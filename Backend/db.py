@@ -21,6 +21,6 @@ def check_password(username, password):
     result = query_db(query)[0][0]  # Array indecies needed as queries return an array
 
     if result == password:
-        return True
+        return True  # Return true if the login is valid
     else:
-        return False
+        return False  # Return false if the login is invalid
