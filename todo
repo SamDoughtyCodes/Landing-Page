@@ -1,6 +1,3 @@
-Decide on hashing alg
-Add hashed password values to database
-Document hashing process
 Write API to get data and query DB, returning login status
 Write login page
 Write landing page

@@ -1,3 +1,25 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from db import check_password
+
+app = FastAPI()
+
+# Create API test call
+@app.get("/api/test")
+def test_api():
+    return {"message": "API is working!"}
+
+# Create a model for the login request
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+# Create an endpoint for user login
+@app.post("/api/login")
+def login(request: LoginRequest):
+    # Check with the database if the username and password are correct
+    is_valid = check_password(request.username, request.password)
+    if is_valid:  # If the password is correct
+        return {"valid": True}
+    else:  # If the password is incorrect
+        return {"valid": False}
