@@ -4,7 +4,7 @@ import os
 # Create connection to the database
 script_dir = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(script_dir, "users.db")
-conn = connect(db_path)
+conn = connect(db_path, check_same_thread=False)
 cursor = conn.cursor()
 
 
