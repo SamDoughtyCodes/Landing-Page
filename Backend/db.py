@@ -18,9 +18,9 @@ def query_db(query):
 def check_password(username, password):
     # Fetch the hashed password for the given username
     query = f"SELECT hashed_password FROM users WHERE username = '{username}';"
-    result = query_db(query)[0][0]  # Array indecies needed as queries return an array
+    result = query_db(query)
 
-    if result == password:
-        return True  # Return true if the login is valid
-    else:
-        return False  # Return false if the login is invalid
+    if result:
+        if result[0][0] == password: return {'valid': True, 'error': None}
+        else: return {'valid': False, 'error': 'Invalid Password'}
+    else: return {'valid': False, 'error': 'Invalid Username'}

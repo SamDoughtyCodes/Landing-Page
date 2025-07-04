@@ -18,8 +18,4 @@ class LoginRequest(BaseModel):
 @app.post("/api/login")
 def login(request: LoginRequest):
     # Check with the database if the username and password are correct
-    is_valid = check_password(request.username, request.password)
-    if is_valid:  # If the password is correct
-        return {"valid": True}
-    else:  # If the password is incorrect
-        return {"valid": False}
+    return check_password(request.username, request.password)
