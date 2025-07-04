@@ -21,3 +21,6 @@ def check_password(username, password):
 
 # Function to add a new user to the database
 def add_user(username, password):
+    query = f"INSERT INTO users (username, hashed_password) VALUES (?, ?);"
+    cursor.execute(query, (username, password))
+    conn.commit()
