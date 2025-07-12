@@ -26,3 +26,36 @@ A basic outline of the database structure is shown below:
 | user_id | INTEGER | Stores the id of the user. Is the Primary Key. |
 | username | varchar(255) | Stores the username. |
 | hashed_password| varchar(255) | Stores the hashed version of the password, for added security. |
+
+### The API
+Using FastAPI, I created a simple python script to handle the login requests. The file contains only 2 endpoints, a GET type test function (to confirm that the API is working correcrly), and a POST type function to confim a login.
+```Python
+# Create a model for the login request
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+# Create an endpoint for user login
+@app.post("/api/login")
+def login(request: LoginRequest):
+    # Check with the database if the username and password are correct
+    return check_password(request.username, request.password)
+```
+The `login` function takes the posted data from the API call as a pydantic BaseModel, and passes it to the `check_password` function of the database.
+```Python
+conn = connect(db_path, check_same_thread=False)
+cursor = conn.cursor()
+
+# Function to compare the provided password with the stored hashed password for a user
+def check_password(username, password):
+    # Fetch the hashed password for the given username
+    query = f"SELECT hashed_password FROM users WHERE username = ?;"
+    cursor.execute(query, (username,))
+    result = cursor.fetchall()
+
+    if result:
+        if result[0][0] == password: return {'valid': True, 'error': None}
+        else: return {'valid': False, 'error': 'Invalid Password'}
+    else: return {'valid': False, 'error': 'Invalid Username'}
+```
+This creates a connection to `users.db`. It then creates a query to fetch the hash value of the password corrisponding with the required username (doing so using parameters to protect from an SQL injection), and stores it in the result variable. If the query returns data (i.e. A user with that username exists), the query password is compared to the API call password. If they are equal, the user can be granted access to the site, otherwise they can be denied based on an incorrect password or an incorrect username, depending on if the query returned any data.
