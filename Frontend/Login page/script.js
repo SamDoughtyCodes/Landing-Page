@@ -7,5 +7,6 @@ function hashData(data) {
 
 // Only run the script when the page contents have loaded
 document.addEventListener("DOMContentLoaded", (e) => {
+    // Add a fetch here to run the API test endpoint
     console.log("Page has loaded, JS running!");
 });
