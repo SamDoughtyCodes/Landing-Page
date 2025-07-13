@@ -21,7 +21,7 @@ security = HTTPBearer()  # Set up security method
 
 # Function to create a token, with data to encrypt, and an expiry time with a default value of 30 mins
 def create_access_token(data: dict, expire_delta: timedelta = timedelta(minutes=30)):
-    to_encode = data
+    to_encode = data  # This becomes the payload
     expiry_time = datetime.now(timezone.utc) + expire_delta  # Add the expiry time to the current time to get the expiry time
     to_encode.update({"exp": expiry_time})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)  # Create the token itself
@@ -38,6 +38,11 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Invalud or expired token"
         )
+    
+# Endpoint to create a protected route. This verifies the token with the user data
+@app.get("api/protected")
+def protected_route(user_data: dict = Depends(verify_token)):
+    return {"message": f"Welcome {user_data['username']}!"}  # Returns a message based on the payload returned from the verified token
 
 # ----------- API Endpoints -----------
 
