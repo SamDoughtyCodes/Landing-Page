@@ -14,7 +14,7 @@ login_form.addEventListener("submit", function(e) {
     e.preventDefault()
     let user = login_form["username"].value;
     let hashed_p = hashData(login_form["password"].value);
-    let login_data = {'username': user, 'password': hashed_p};
+    let login_data = {"username": user, "password": hashed_p};
 
     // Check the login data
     let res_data;
@@ -23,7 +23,7 @@ login_form.addEventListener("submit", function(e) {
     .then(data => {res_data = data;})  // Store the response in the res_data variable
 
     // Deal with the login data accordingly
-    let valid = res_data.valid;
+    let valid = data.valid;
     if (!valid) {  // If the login details aren't valid, output a suitable message
         let err = res_data.error;
         let msg_p = document.getElementById("login_status_msg");
