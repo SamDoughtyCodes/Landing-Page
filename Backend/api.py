@@ -1,5 +1,6 @@
 # API related imports
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 # Self-made imports
 from db import check_password
@@ -10,6 +11,16 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 
 app = FastAPI()
+
+# ----------- API ACCESS -----------
+origins = ["http://localhost:3000"] # The allowed origins for API calls (only localhost 3000 for this example)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Set the allowed origins
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],  # Only allow GET and POST methods
+    allow_headers=["*"]  # Allow any headers (in order to recieve tokens)
+)
 
 # ----------- TOKENS -----------
 
