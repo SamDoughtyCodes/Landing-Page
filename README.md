@@ -8,6 +8,18 @@ The following structure diagram provides a basic overview of the components of t
 ![Project structure diagram](https://github.com/SamDoughtyCodes/Landing-Page/blob/main/Super-Curricular%20Landing%20Page%20(1).png)
 
 ## How to use the site
+### Hosting
+Hosting the site requires python and uvicorn (which can be installed via pip).
+To host the site, navigate to the `Frontend` directory and run:
+```bash
+python3 -m http.server 3000
+```
+To host the API, navigate to the `Backend` directory and run:
+```bash
+uvicorn api:app --port 8000
+```
+Once these are running, navigate [here](http://localhost:3000).
+### Login details
 Although this would typically be extremely insecure, as this is a demonstrative project and contains no sensitive data, I have shown some valid login credentials beneath for you to use. I have also shown the hashed passwords for reference.
 | Username | Password | Hashed Password |
 | -------- | -------- | --------------- |
