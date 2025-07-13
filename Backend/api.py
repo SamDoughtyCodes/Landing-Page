@@ -13,7 +13,7 @@ from datetime import datetime, timedelta, timezone
 app = FastAPI()
 
 # ----------- API ACCESS -----------
-origins = ["http://localhost:3000"] # The allowed origins for API calls (only localhost 3000 for this example)
+origins = ["http://localhost:3000", "http://localhost:3000/Login page/login.html"] # The allowed origins for API calls (only localhost 3000 for this example)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Set the allowed origins
