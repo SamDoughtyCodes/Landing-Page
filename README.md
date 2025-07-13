@@ -1,5 +1,5 @@
 # Landing-Page
-A basic landing page with login credentials, hooked up to a database for a bit of fun
+A basic landing page with login credentials, with a key focus on security via hashing, a database, and tokens.
 
 NOTE: All commits are made by me, Sam Doughty. Any from the account "LilSpinachBoy1" are still me, but just from certain devices where that account is signed in.
 
@@ -59,3 +59,6 @@ def check_password(username, password):
     else: return {'valid': False, 'error': 'Invalid Username'}
 ```
 This creates a connection to `users.db`. It then creates a query to fetch the hash value of the password corrisponding with the required username (doing so using parameters to protect from an SQL injection), and stores it in the result variable. If the query returns data (i.e. A user with that username exists), the query password is compared to the API call password. If they are equal, the user can be granted access to the site, otherwise they can be denied based on an incorrect password or an incorrect username, depending on if the query returned any data.
+
+### Tokens
+I have used JWTs to add further security to the site. When a user goes to the landing page, a check takes place. If they have a valid token, they can enter the site, otherwise, they will be redirected to the login page. At the login page, their credentials will be checked, and if correct, a token will be created and stored client-side.
