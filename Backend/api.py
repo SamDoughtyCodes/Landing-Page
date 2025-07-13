@@ -40,7 +40,7 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
         )
     
 # Endpoint to create a protected route. This verifies the token with the user data
-@app.get("api/protected")
+@app.get("/api/protected")
 def protected_route(user_data: dict = Depends(verify_token)):
     return {"message": f"Welcome {user_data['username']}!"}  # Returns a message based on the payload returned from the verified token
 
