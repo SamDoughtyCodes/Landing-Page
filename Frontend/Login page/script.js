@@ -2,7 +2,6 @@
 import sha3 from "https://cdn.jsdelivr.net/npm/js-sha3@0.9.2/+esm";
 
 const token = localStorage.getItem("token");  // Attempt to fetch the token of the user
-console.log(token);
 
 function hashData(data) {
     return sha3.sha3_256(data);  // Directly compute and return the hash
