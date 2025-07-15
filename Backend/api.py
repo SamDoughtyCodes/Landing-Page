@@ -71,4 +71,5 @@ class LoginRequest(BaseModel):
 @app.post("/api/login")
 def login(request: LoginRequest):
     # Check with the database if the username and password are correct
+    #TODO: Change this to generate a token if the login is valid and if so return it
     return check_password(request.username, request.password)
