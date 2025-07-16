@@ -27,6 +27,8 @@ login_form.addEventListener("submit", async function(e) {
         if (err === "Invalid Username") {msg_p.innerText = "This username does not exist!";}
         else if (err === "Invalid Password") {msg_p.innerText = "Incorrect password!";}
     } else {  // If the login details are valid, create a token for the user
-        console.log("Valid login!")
+        // This needs to store the token returned in data and then redirect to the main page
+        localStorage.setItem("token", data.token);
+        window.location.href = "../index.html";
     }
 });
